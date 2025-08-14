@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CadastroController;
 use App\Http\Controllers\SalaController;
 use App\Http\Controllers\LaudoController;
+use App\Http\Controllers\MedicoController;
 
 // Rota para exibir o formulário de cadastro
 Route::get('/cadastro', [CadastroController::class, 'create'])->name('cadastro.create');
@@ -39,10 +40,23 @@ Route::get('/sobre', function () {
     return view('sobre');
 })->name('sobre');
 
+
 // Cadastrar laudo
 Route::get('/cadastrarlaudo', function () {
     return view('cadastrarlaudo');
 })->name('cadastrarlaudo');
+
+Route::get('/pefil', function () {
+    return view('perfil'); // <<-- Sugiro que a home seja a '/'
+})->name('perfil');// <-- Adiciona o fechamento do grupo middleware
+
+Route::get('/perfil-medico', function () {
+    return view('perfil-medico');
+})->name('perfil-medico');// <-- Adiciona o fechamento do grupo middleware
+
+Route::get('/cadastromedico', function () {
+    return view('cadastromedico');
+})->name('cadastromedico');// <-- Adiciona o fechamento do grupo middleware
 
 // ROTAS DE SALAS
 Route::get('/salas', [SalaController::class, 'index'])->name('salas.index');
@@ -51,6 +65,13 @@ Route::post('/salas', [SalaController::class, 'store'])->name('salas.store');
 
 // Laudo
 Route::post('/laudo', [LaudoController::class, 'store'])->name('laudo.store');
+
+
+// Rota para exibir o formulário de cadastro
+Route::get('/cadastromedico', [MedicoController::class, 'create'])->name('cadastromedico.create');
+
+// Rota para processar o formulário de cadastro
+Route::post('/cadastromedico', [MedicoController::class, 'store'])->name('cadastromedico.store');
 
 // Se você não for usar o sistema de autenticação padrão do Laravel (Breeze/Jetstream)
 // require __DIR__.'/auth.php';

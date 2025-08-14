@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Médico - Conexus</title>
+    <title>Cadastro - Conexus</title>
     {{-- Isso garante que o caminho para o CSS esteja correto --}}
     <link rel="stylesheet" href="{{ asset('CSS/styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="{{ asset('js/medico.js') }}"></script>
 </head>
 <body>
     <div class="container">
         <div class="form-container">
             <h1 class="logo">c<span class="logo-o">o</span>nexus</h1>
             <h2>Crie sua conta</h2>
-            <p>Junte-se à nossa comunidade para compartilhar experiências.</p>
+            <p>Junte-se à nossa comunidade para cuidar da saúde mental!</p>
             <form action="{{ route('cadastro.store') }}" method="POST">
-                @csrf
+                <form action="{{ route('cadastro.store') }}" method="POST">
+    @csrf
 
-                @if ($errors->any())
-                    <div class="alert alert-danger" style="color: red; margin-bottom: 20px;">
-                        <ul>
+    @if ($errors->any())
+        <div class="alert alert-danger" style="color: red; margin-bottom: 20px;">
+            <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -42,8 +44,12 @@
     </div>
 
     <div class="input-group">
+        <label for="cpf">CPF</label>
+        <input type="text" id="cpf" name="cpf" placeholder="Apenas números" required value="{{ old('cpf') }}">
+    
+    <div class="input-group">
         <label for="crm">CRM</label>
-        <input type="text" id="crm" name="crm" inputmode="numeric" placeholder="Apenas números" required value="{{ old('crm') }}">
+        <input type="text" id="crm" name="crm" placeholder="Exemplo: 00000000-0/BR" required value="{{ old('crm') }}">
     </div>
 
     <div class="input-group">
@@ -76,7 +82,5 @@
             <p class="login-link">Já tem uma conta? <a href="">Faça login</a></p>
         </div>
     </div>
-
-    <script src="{{ asset('js/masks.js') }}"></script>
 </body>
 </html>

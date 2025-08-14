@@ -34,6 +34,8 @@ main {
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 h2 {
@@ -48,7 +50,16 @@ form {
 
 label {
   margin-top: 15px;
+  margin-bottom: 15px;
   font-weight: bold;
+}
+
+label[for="laudo"] {
+  margin-bottom: 10px;
+}
+
+select#laudo {
+  margin-bottom: 30px;
 }
 
 input,
@@ -70,19 +81,20 @@ textarea:focus {
 }
 
 button {
-  margin-top: 25px;
   background-color: #0bb39c;
+  margin-top: 40px;
+  margin-bottom: 20px;
   color: white;
   padding: 12px;
   font-size: 1rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 100px;
   cursor: pointer;
   transition: background-color 0.3s;
   font-family: poppins, sans-serif;
+  gap: 10px;
 }
 
 button:hover {
-  background-color: #59dda0
-  ;
+  background-color: #59dda0;
 }

@@ -11,7 +11,7 @@
       <section class="menu-desktop">
         <nav>
           <ul class="links">
-            <li><a href="../perfil/index.php">Perfil</a></li>
+            <li><a href="{{ route('perfil') }}">Perfil</a></li>
             <li><a href="{{ route('area-user') }}">Aréa de Usuário</a></li>
             <li><a href="{{ route('sobre') }}">Sobre Nós</a></li>
             <li><a href="{{ route('salas.index') }}">Salas</a></li>

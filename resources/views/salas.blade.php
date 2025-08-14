@@ -12,23 +12,34 @@
                 <span class="arrow">▶️</span>
                 <span>Tema: {{ $sala->tema }}</span>
                 <span>Doutor: {{ $sala->nome_medico }}</span>
-                <span>Vagas: {{ $sala->numero_participantes }}</span>
+                <span>
+                Vagas: {{ $sala->numero_participantes }}/8
+                @if($sala->numero_participantes >= 8)
+                <span class="important">(Sala já está cheia)</span>
+                @else
+                <span class="not-important">({{ 8 - $sala->numero_participantes }} vagas disponíveis)</span>
+                @endif
+                </span>
             </div>
             <div class="card-body">
-                <div class="info upload">
-                    📎 Laudo médico.<br />Anexar o arquivo em PDF por favor.
-                    <input type="file" accept="application/pdf" />
-                </div>
-                <div class="info">
-                    O laudo {!! $sala->laudo_obrigatorio ? '<span class="important">é obrigatório</span>' : '<span class="not-important">não é</span>' !!} obrigatório nesta sala
-                </div>
-                <div class="info">
-                    Horário: de {{ $sala->hora }}
-                </div>
-                <button class="button-available" onclick="openModal(event)">
-                    Agendar conversa
-                </button>
-            </div>
+    @if($sala->laudo_obrigatorio == 1)
+        <div class="info upload">
+            📎 Laudo médico.<br />Anexar o arquivo em PDF por favor.
+            <input type="file" accept="application/pdf" />
+        </div>
+    @endif
+    <div class="info">
+        O laudo {!! $sala->laudo_obrigatorio ? '<span class="important">é obrigatório</span>' : '<span class="not-important">não é</span>' !!} obrigatório nesta sala
+    </div>
+    <div class="info">
+    Data e horário: {{ \Carbon\Carbon::parse($sala->data)->format('d/m/Y') }} às {{ \Carbon\Carbon::parse($sala->hora)->format('H:i') }}
+    </div>
+    @if($sala->numero_participantes >= 8)
+    <button class="button-full" disabled>Sala já está cheia</button>
+    @else
+    <button class="button-available" onclick="openModal(event)">Agendar conversa</button>
+    @endif
+</div>
         </div>
     @endforeach
 </div>
@@ -42,13 +53,36 @@
 </div>
 
 <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #1ec2b3, #6c5edb); }
-    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-    .search { width: 60%; padding: 10px 15px; border-radius: 10px; border: none; font-size: 16px; background-color: #f0f0f0; }
-    .cards { display: flex; flex-direction: column; gap: 15px; }
+    .top-bar {
+        display: flex;
+        justify-content: center; /* Centraliza horizontalmente */
+        margin-top: 30px; /* Adiciona margem superior */
+        margin-bottom: 30px; /* Adiciona margem inferior */
+        align-items: center;
+        width: 100%;
+    }
+    .search {
+        width: 60%;
+        max-width: 400px;
+        min-width: 180px;
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: none;
+        font-size: 16px;
+        background-color: #f0f0f0;
+        margin: 0 auto;
+        display: block;
+    }
+    .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-bottom: 40px;  /* Adicione esta linha */
+    }
     .card { background-color: #f7f9f1; border-radius: 10px; padding: 15px 20px; transition: all 0.3s ease-in-out; overflow: hidden; border: 2px solid transparent; }
-    .card-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; flex-wrap: wrap; }
     .arrow { display: inline-block; transition: transform 0.3s; }
     .card.expanded .arrow { transform: rotate(90deg); }
     .card.expanded { border-color: #0066ff; }
@@ -66,8 +100,10 @@
     .modal-content { background-color: white; padding: 20px; border-radius: 10px; width: 300px; }
     .modal-content input[type="file"] { margin-bottom: 10px; }
     @media (max-width: 768px) {
-        .search { width: 100%; margin-bottom: 10px; }
-        .top-bar { flex-direction: column; align-items: stretch; }
+        .top-bar { justify-content: center; }
+        .search { width: 95%; max-width: 100%; }
+        .card-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+        .card { width: 100%; box-sizing: border-box;}
     }
 </style>
 
