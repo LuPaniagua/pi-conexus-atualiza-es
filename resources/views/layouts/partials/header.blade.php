@@ -49,7 +49,7 @@
 
 
       <section class="btn-contato">
-        <a href="{{ route('cadastro.create') }}">
+        <a href="{{ route('escolha') }}">
             <button>Conecte-se</button>
         </a>
       </section>

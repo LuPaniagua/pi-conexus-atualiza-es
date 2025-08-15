@@ -14,16 +14,15 @@
 <body>
     <div class="container">
         <div class="form-container">
-            <h1 class="logo">c<span class="logo-o">o</span>nexus</h1>
+            <h1 class="logo">C<span class="logo-o">o</span>nexus</h1>
             <h2>Crie sua conta</h2>
             <p>Junte-se à nossa comunidade para cuidar da saúde mental!</p>
-            <form action="{{ route('cadastro.store') }}" method="POST">
-                <form action="{{ route('cadastro.store') }}" method="POST">
-    @csrf
+            <form action="{{ route('cadastromedico.store') }}" method="POST">
+                @csrf
 
-    @if ($errors->any())
-        <div class="alert alert-danger" style="color: red; margin-bottom: 20px;">
-            <ul>
+                @if ($errors->any())
+                    <div class="alert alert-danger" style="color: red; margin-bottom: 20px;">
+                        <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -34,8 +33,8 @@
     {{-- Seus input-groups existentes --}}
 
     <div class="input-group">
-        <label for="name">Nome</label>
-        <input type="text" id="name" name="name" placeholder="Digite seu nome completo" required value="{{ old('name') }}">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required value="{{ old('nome') }}">
     </div>
 
     <div class="input-group">
@@ -64,12 +63,12 @@
 
     <div class="input-group">
         <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" placeholder="Crie uma senha segura" required>
+        <input type="password" id="senha" name="password" placeholder="Crie uma senha segura" required>
     </div>
 
     <div class="input-group">
         <label for="confirmar-senha">Confirmar a senha</label>
-        <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Confirme sua senha" required>
+        <input type="password" id="confirmar-senha" name="password_confirmation" placeholder="Confirme sua senha" required>
     </div>
 
     <div class="checkbox-group">

@@ -50,7 +50,7 @@
         }
         .editar-btn {
             margin-top: 20px;
-            padding: 8px 20px;
+            padding: 8px 20px;  
             background: #007bff;
             color: #fff;
             border: none;

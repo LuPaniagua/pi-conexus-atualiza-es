@@ -66,6 +66,11 @@ Route::post('/salas', [SalaController::class, 'store'])->name('salas.store');
 // Laudo
 Route::post('/laudo', [LaudoController::class, 'store'])->name('laudo.store');
 
+// Escolha
+
+Route::get('/escolha', function () {
+    return view('escolha');
+})->name('escolha');
 
 // Rota para exibir o formulário de cadastro
 Route::get('/cadastromedico', [MedicoController::class, 'create'])->name('cadastromedico.create');
@@ -73,5 +78,10 @@ Route::get('/cadastromedico', [MedicoController::class, 'create'])->name('cadast
 // Rota para processar o formulário de cadastro
 Route::post('/cadastromedico', [MedicoController::class, 'store'])->name('cadastromedico.store');
 
+Route::middleware('auth.medico')->group(function () {
+    Route::get('/perfil-medico', function () {
+        return view('perfil-medico');
+    });
+});
 // Se você não for usar o sistema de autenticação padrão do Laravel (Breeze/Jetstream)
 // require __DIR__.'/auth.php';
